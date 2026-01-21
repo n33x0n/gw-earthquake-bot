@@ -1,0 +1,7 @@
+# Ignore everything
+*
+# Except public folder
+!public/
+!public/**
+# And this file
+!.gitignore
