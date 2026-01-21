@@ -31,6 +31,7 @@ TEST_MODE = "--test" in sys.argv
 HISTORY_FILE = "processed_ids.json"
 
 DW_FOLDER_ID = None  # paste your Datawrapper folder ID here
+DW_ZOOM_LEVEL = 6
 
 
 def load_history():
@@ -66,6 +67,15 @@ def create_datawrapper_map(lat, lon, place, mag, geojson_payload=None):
     
     if DW_FOLDER_ID:
         payload["folderId"] = DW_FOLDER_ID
+
+    payload["metadata"] = {
+        "visualize": {
+            "view": {
+                "center": [lon, lat],
+                "zoom": DW_ZOOM_LEVEL
+            }
+        }
+    }
     
     try:
         print(f"Creating Datawrapper chart for {place}...")
