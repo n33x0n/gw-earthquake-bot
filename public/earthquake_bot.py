@@ -31,7 +31,12 @@ TEST_MODE = "--test" in sys.argv
 HISTORY_FILE = "processed_ids.json"
 
 DW_FOLDER_ID = None  # paste your Datawrapper folder ID here
-DW_ZOOM_LEVEL = 6
+DW_ZOOM_LEVEL = 6.5
+
+DW_NOTES = ""  # paste your custom notes HTML here
+DW_BYLINE = ""  # paste your byline here
+DW_SOURCE_NAME = "USGS"  # paste data source name here
+DW_SOURCE_LINK = "https://earthquake.usgs.gov"  # paste data source link here
 
 
 def load_history():
@@ -68,12 +73,38 @@ def create_datawrapper_map(lat, lon, place, mag, geojson_payload=None):
     if DW_FOLDER_ID:
         payload["folderId"] = DW_FOLDER_ID
 
+    
+    # Ensure URL has protocol
+    if DW_SOURCE_LINK and not DW_SOURCE_LINK.startswith(('http://', 'https://')):
+        source_link = "https://" + DW_SOURCE_LINK
+    else:
+        source_link = DW_SOURCE_LINK
+
     payload["metadata"] = {
         "visualize": {
+            "scale": True,
+            "miniMap": {
+                "enabled": True
+            },
             "view": {
                 "center": [lon, lat],
                 "zoom": DW_ZOOM_LEVEL
             }
+        },
+        "publish": {
+            "blocks": {
+                "logo": {
+                    "enabled": False
+                }
+            }
+        },
+        "annotate": {
+            "notes": DW_NOTES
+        },
+        "describe": {
+            "byline": DW_BYLINE,
+            "source-name": DW_SOURCE_NAME,
+            "source-url": source_link
         }
     }
     
