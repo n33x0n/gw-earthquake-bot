@@ -1,5 +1,8 @@
 # Ignore everything
 *
+.DS_Store
+LICENSE
+README.md
 # Except public folder
 !public/
 !public/**
