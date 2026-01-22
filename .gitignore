@@ -1,11 +1,3 @@
-# Ignore everything
-*
-.DS_Store
+dev/
+.dev/
 .gitignore
-LICENSE
-README.md
-public/.DS_Store
-
-# Except public folder
-!public/
-!public/**
