@@ -1,10 +1,11 @@
 # Ignore everything
 *
 .DS_Store
+.gitignore
 LICENSE
 README.md
+public/.DS_Store
+
 # Except public folder
 !public/
 !public/**
-# And this file
-!.gitignore
